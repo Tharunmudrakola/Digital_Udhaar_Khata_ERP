@@ -12,6 +12,22 @@ const path =
 
 require("dotenv").config();
 
+console.log(
+  "🚀 SERVER STARTING..."
+);
+
+console.log(
+  "MONGO_URI:",
+  process.env.MONGO_URI
+    ? "FOUND"
+    : "MISSING"
+);
+
+console.log(
+  "PORT:",
+  process.env.PORT || 5000
+);
+
 // ROUTES
 
 const authRoutes =
@@ -35,16 +51,23 @@ const app = express();
 // ================= MIDDLEWARE =================
 
 app.use(
+
   cors({
+
     origin: "*",
-    credentials: true,
+
+    credentials: true
+
   })
+
 );
 
-app.use(express.json());
+app.use(
+  express.json()
+);
 
 
-// ================= STATIC UPLOADS =================
+// ================= STATIC FILES =================
 
 app.use(
 
@@ -110,59 +133,85 @@ app.use(
 
 // ================= TEST ROUTE =================
 
-app.get("/", (req, res) => {
+app.get(
 
-  res.send(
+  "/",
 
-    "API Running Successfully"
+  (req, res) => {
 
-  );
+    res.status(200).json({
 
-});
+      success: true,
+
+      message:
+        "API Running Successfully"
+
+    });
+
+  }
+
+);
 
 
-// ================= DATABASE =================
+// ================= START SERVER =================
 
-mongoose.connect(
+const startServer =
+  async () => {
 
-  process.env.MONGO_URI
+    try {
 
-)
+      await mongoose.connect(
 
-.then(() => {
+        process.env.MONGO_URI,
 
-  console.log(
+        {
 
-    "MongoDB Connected"
+          serverSelectionTimeoutMS:
+            30000
 
-  );
+        }
 
-  app.listen(
-
-    process.env.PORT || 5000,
-
-    () => {
+      );
 
       console.log(
+        "✅ MongoDB Connected"
+      );
 
-        `Server running on port ${process.env.PORT || 5000}`
+      const PORT =
+        process.env.PORT || 5000;
+
+      app.listen(
+
+        PORT,
+
+        () => {
+
+          console.log(
+
+            `✅ Server running on port ${PORT}`
+
+          );
+
+        }
 
       );
 
     }
 
-  );
+    catch (error) {
 
-})
+      console.error(
+        "❌ MongoDB Connection Failed"
+      );
 
-.catch((err) => {
+      console.error(
+        error
+      );
 
-  console.log(
+      process.exit(1);
 
-    "Mongo Error:",
+    }
 
-    err
+  };
 
-  );
-
-});
+startServer();
