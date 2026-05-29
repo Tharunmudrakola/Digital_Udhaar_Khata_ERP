@@ -1,0 +1,51 @@
+## user registration
+POST http://localhost:5000/api/auth/register
+Content-Type: application/json
+
+{
+    "name": "Tharun",
+    "email": "tharun@gmail.com",
+    "password": "123456"
+}
+
+### LOGIN
+POST http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+{
+    "email": "tharun@gmail.com",
+    "password": "123456"
+}
+### ADD CUSTOMER
+POST http://localhost:5000/api/customers
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhMGFhMmQ3MWE1ZTNhMTQ5NThhOGFiYiIsImlhdCI6MTc3OTA4MjM2NywiZXhwIjoxNzc5Njg3MTY3fQ.twOLFUi2iZPUkYxG8Xoc103SRnEmWuCl9PFkANZBtfc
+Content-Type: application/json
+
+{
+    "name": "Ramesh",
+    "phone": "9876543210",
+    "address": "Hyderabad"
+}
+### GET CUSTOMERS
+GET http://localhost:5000/api/customers
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhMGFhMmQ3MWE1ZTNhMTQ5NThhOGFiYiIsImlhdCI6MTc3OTA4MjM2NywiZXhwIjoxNzc5Njg3MTY3fQ.twOLFUi2iZPUkYxG8Xoc103SRnEmWuCl9PFkANZBtfc
+
+### ADD TRANSACTION
+POST http://localhost:5000/api/transactions
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhMGFhMmQ3MWE1ZTNhMTQ5NThhOGFiYiIsImlhdCI6MTc3OTA4MjM2NywiZXhwIjoxNzc5Njg3MTY3fQ.twOLFUi2iZPUkYxG8Xoc103SRnEmWuCl9PFkANZBtfc
+Content-Type: application/json
+
+{
+    "customerId": "6a0aa4c8c1fc1bc024e67ddd",
+    "type": "credit",
+    "amount": 500,
+    "note": "Rice Purchase"
+}
+### GET TRANSACTIONS
+GET http://localhost:5000/api/transactions/6a0aa4c8c1fc1bc024e67ddd
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhMGFhMmQ3MWE1ZTNhMTQ5NThhOGFiYiIsImlhdCI6MTc3OTA4MjM2NywiZXhwIjoxNzc5Njg3MTY3fQ.twOLFUi2iZPUkYxG8Xoc103SRnEmWuCl9PFkANZBtfc
+
+### DASHBOARD
+GET http://localhost:5000/api/dashboard
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhMGFhMmQ3MWE1ZTNhMTQ5NThhOGFiYiIsImlhdCI6MTc3OTA4MjM2NywiZXhwIjoxNzc5Njg3MTY3fQ.twOLFUi2iZPUkYxG8Xoc103SRnEmWuCl9PFkANZBtfc
+ 
